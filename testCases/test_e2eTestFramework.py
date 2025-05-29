@@ -41,3 +41,4 @@ def test_e2e(browserInstance):
     print(driver.find_element(By.CSS_SELECTOR, "div[class*='alert-success']").text)
 
     time.sleep(3)
+    driver.close()
