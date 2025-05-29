@@ -8,8 +8,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 def test_e2e(browserInstance):
     driver = browserInstance
-    driver.get("https://rahulshettyacademy.com/angularpractice/")
+    driver.get("https://rahulshettyacademy.com/loginpagePractise/")
     driver.maximize_window()
+    driver.find_element(By.ID,"username").send_keys("rahulshettyacademy")
+    driver.find_element(By.ID, "password").send_keys("learning")
+    driver.find_element(By.ID, "signInBtn").click()
+
     # //a[contains(@href,'shop')]   a[href*='shop']
     driver.find_element(By.XPATH, "//a[contains(@href,'shop')]").click()
 
@@ -41,4 +45,4 @@ def test_e2e(browserInstance):
     print(driver.find_element(By.CSS_SELECTOR, "div[class*='alert-success']").text)
 
     time.sleep(3)
-    driver.close()
+    # driver.close()
