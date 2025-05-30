@@ -6,6 +6,7 @@ def pytest_addoption(parser):   #This will get the value from CLI/hooks
         "--browser_name", action="store", default="chrome", help="browser selection"
     )
 
+# setup and teardown in one function. Separated with yield step.
 @pytest.fixture()
 def browserInstance(request):
     browser_name = request.config.getoption("--browser_name")
