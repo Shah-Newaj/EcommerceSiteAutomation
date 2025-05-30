@@ -1,5 +1,15 @@
+import os
+import sys
+
 import pytest
 from selenium import webdriver
+
+#------------------------------------------------------------
+# Solution for  "ModuleNotFoundError: No module named 'pageObjects'" .. need to add below line here
+# without this line code will not run.Between this 2 line anyone will work.
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#------------------------------------------------------------
 
 def pytest_addoption(parser):   #This will get the value from CLI/hooks
     parser.addoption(
