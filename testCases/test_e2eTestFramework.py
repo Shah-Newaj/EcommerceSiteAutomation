@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from pageObjects.loginPage import LoginPage
+from pageObjects.shopPage import ShopPage
 
 
 def test_e2e(browserInstance):
@@ -16,35 +17,13 @@ def test_e2e(browserInstance):
     driver.maximize_window()
 
     loginPage = LoginPage(driver)
-    loginPage.login()
-
-    # //a[contains(@href,'shop')]   a[href*='shop']
-    driver.find_element(By.XPATH, "//a[contains(@href,'shop')]").click()
-
-    elements = driver.find_elements(By.XPATH, "//div[@class='card h-100']")
-    # element_names = [ele.text for ele in elements]
-
-    for element in elements:
-        element_names = element.find_element(By.XPATH, "div/h4/a").text  # Chaining Used in the locator here
-        if element_names == "Blackberry":
-            element.find_element(By.XPATH, "div/button").click()  # Chaining Used in the locator here
-
-    # ------------------------ Click on checkout on product page ----------------------------
-    driver.find_element(By.CSS_SELECTOR, "a[class*='btn-primary']").click()
-    # ------------------------ Click on Checkout on Cart Page --------------------------------
-    driver.find_element(By.XPATH, "//button[@class='btn btn-success']").click()
-
-    driver.find_element(By.ID, "country").send_keys("ban")
-    wait = WebDriverWait(driver, 10)  # initializing Explicit wait
-    wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT, "Bangladesh")))  # Applying Explicit Wait
-    driver.find_element(By.LINK_TEXT, "Bangladesh").click()
-    driver.find_element(By.XPATH, "//div[@class='checkbox checkbox-primary']").click()
-
-    purchase = driver.find_element(By.XPATH, "//input[@value='Purchase']")
-    purchase.click()
-
-    successText = driver.find_element(By.CSS_SELECTOR, "div[class*='alert-success']").text
-    assert "Success! Thank you!" in successText
+    shopPage = loginPage.login()    #shopPage Object creation got encapsulated in loginPage.login()
+    shopPage.add_product_to_cart("Blackberry")
+    # checkout_confirmation Object creation encapsulated in shopPage.goToCart()
+    checkout_confirmation = shopPage.goToCart()
+    checkout_confirmation.checkout()
+    checkout_confirmation.enter_delivery_address("Ban")
+    checkout_confirmation.validate_order()
 
     print(driver.find_element(By.CSS_SELECTOR, "div[class*='alert-success']").text)
 
