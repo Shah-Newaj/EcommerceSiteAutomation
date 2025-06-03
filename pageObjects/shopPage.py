@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 from pageObjects.checkout_confirmation import Checkout_Confirmation
+from utils.browserUtils import BrowserUtils
 
 
-class ShopPage:
+class ShopPage(BrowserUtils):
     def __init__(self, driver):
+        super().__init__(driver)    # Parent Class Constructor. Applying Inheritance
         self.driver = driver
         self.shop_link = (By.XPATH, "//a[contains(@href,'shop')]")
         self.product_cards = (By.XPATH, "//div[@class='card h-100']")
