@@ -1,6 +1,5 @@
 import os
 import sys
-
 import pytest
 from selenium import webdriver
 
@@ -33,5 +32,7 @@ def browserInstance(request):
 
     # Global Time out - max 5 seconds
     driver.implicitly_wait(5)  # Applying Implicit Wait
+    driver.get("https://rahulshettyacademy.com/loginpagePractise/")
+    driver.maximize_window()
     yield driver   # before test function execution
     driver.close()  # post test function execution
