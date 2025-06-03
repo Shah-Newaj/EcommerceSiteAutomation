@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 from pageObjects.shopPage import ShopPage
+from utils.browserUtils import BrowserUtils
 
 
-class LoginPage():
+class LoginPage(BrowserUtils):
     def __init__(self, driver):
+        super().__init__(driver)    # Parent Class Constructor. Applying Inheritance
         self.driver = driver
         # 2 arguments storing in one variable. Packed in one variable so in action method unpacking will be needed.
         self.username_input = (By.ID, "username")
