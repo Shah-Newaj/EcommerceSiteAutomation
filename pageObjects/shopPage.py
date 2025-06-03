@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from pageObjects.checkout_confirmation import Checkout_Confirmation
 
 
