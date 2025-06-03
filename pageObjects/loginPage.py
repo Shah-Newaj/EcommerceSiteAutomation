@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from pageObjects.shopPage import ShopPage
 
 
@@ -12,10 +11,10 @@ class LoginPage():
         self.signIn_button = (By.ID, "signInBtn")
 
 
-    def login(self):
+    def login(self, username, password):
         # before self, * is used to break/unpack the tuple into 2 arguments as 'find_element' accepts argument
-        self.driver.find_element(*self.username_input).send_keys("rahulshettyacademy")
-        self.driver.find_element(*self.password).send_keys("learning")
+        self.driver.find_element(*self.username_input).send_keys(username)
+        self.driver.find_element(*self.password).send_keys(password)
         self.driver.find_element(*self.signIn_button).click()
         # shopPage Object creation got encapsulated here
         shopPage = ShopPage(self.driver)
